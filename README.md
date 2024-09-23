@@ -6,7 +6,7 @@
 - ~~- cicflowmeter~~ nettopng
 - nmap 
 
-## VM - VirtualBox - Setup
+## VM - AWS EC2
 
 Adding ntopng to the mix. (insteadof cicflowmeter)
 ```bash
