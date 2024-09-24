@@ -36,7 +36,7 @@ locals {
   key_name = "lalmeida-rsa"
   ip_grupo = [
     "${chomp(data.http.ipv4.response_body)}/32", # Lucas
-    "190.115.103.110/32"                         # Filipe
+    "190.115.103.114/32"                         # Filipe
   ]
   user_data = <<-EOF
   #cloud-config
@@ -62,7 +62,7 @@ locals {
 locals {
   region = "us-east-1"
   prefix = "lab"
-  instance_type = "t3.micro"
+  instance_type = "t3.large"
   create_spot_instance = false
   open_ports = [
     "3306",
@@ -145,6 +145,45 @@ resource "aws_instance" "machine" {
   subnet_id              = data.aws_subnet.default-lab.id
   associate_public_ip_address = true
   user_data = local.user_data
+
+  root_block_device {
+    volume_size = 30
+    volume_type = "gp3"
+  }
+
+  tags = {
+    Name = "${local.prefix}-${local.project}-${random_string.suffix.result}"
+  }
+
+  # Wait for cloud-init to finish
+  provisioner "remote-exec" {
+    inline = [
+      "cloud-init status --wait"
+    ]
+  }
+
+  connection {
+    type       = "ssh"
+    user      = "ubuntu"
+    host       = self.public_ip
+    #private_key = file("./your_private_key.pem")
+  }
+}
+
+resource "aws_instance" "machine2" {
+  ami                   = data.aws_ami.selected.id
+  instance_type          = "t3.medium"
+  key_name               = local.key_name
+  monitoring             = true
+  vpc_security_group_ids = [aws_security_group.instance_sg.id]
+  subnet_id              = data.aws_subnet.default-lab.id
+  associate_public_ip_address = true
+  user_data = local.user_data
+
+  root_block_device {
+    volume_size = 30
+    volume_type = "gp3"
+  }
 
   tags = {
     Name = "${local.prefix}-${local.project}-${random_string.suffix.result}"

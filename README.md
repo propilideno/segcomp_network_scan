@@ -38,7 +38,25 @@ You can also use nmap to scan the ports.
 ```
 
 ### nmap
-- 
+```bash
+nmap $IP
+nmap -A $IP
+``` 
 
 ### tcpdump
-- 
+```bash
+INTERFACE="enp5"
+```
+
+```bash
+tcpdump -i $(INTERFACE) -w mycapture.pcap
+``` 
+
+### zeek
+```bash
+zeek -r mycapture.pcap
+```
+Parse the logs to CSV format.
+```bash
+cat *.log | sed 's/\t/,/g'
+```
