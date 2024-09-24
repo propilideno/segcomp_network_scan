@@ -41,6 +41,8 @@ You can also use nmap to scan the ports.
 ```bash
 nmap $IP
 nmap -A $IP
+nmap -p0- -v -A -T4 $IP
+nmap -p80-85,443,8000-8005,3000-3306 $IP
 ``` 
 
 ### tcpdump
