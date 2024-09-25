@@ -1,10 +1,10 @@
 # Segcomp - Network Scan and Analysis
 
-## Tools 
+## Tools
 - tcpdump
 - zeek
 - ~~- cicflowmeter~~ nettopng
-- nmap 
+- nmap
 
 ## VM - AWS EC2
 
@@ -43,16 +43,19 @@ nmap $IP
 nmap -A $IP
 nmap -p0- -v -A -T4 $IP
 nmap -p80-85,443,8000-8005,3000-3306 $IP
-``` 
+```
 
 ### tcpdump
 ```bash
 INTERFACE="enp5"
+
+sudo tcpdump -i enp0s5 port 80
+sudo tcpdump -i enp0s5 host 107.22.107.88
 ```
 
 ```bash
 tcpdump -i $(INTERFACE) -w mycapture.pcap
-``` 
+```
 
 ### zeek
 ```bash
