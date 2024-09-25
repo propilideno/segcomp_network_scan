@@ -46,14 +46,11 @@ docker run -d --net=host ntop/ntopng:stable --community -i any
 ```bash
 IP=$(107.21.72.125)
 ```
-
 With netcat you can check if a port is open or not.
 ```bash
 for i in "80" "3000" "3306" "8080" "443" "22" "9000" ""; do nc -zv $IP $i; done
 ```
 You can also use nmap to scan the ports.
-```bash
-```
 
 ### nmap
 With nmap you can scan the ports of a target. You also can use the `-A` flag to get more information about the target and the `-p` flag to specify the ports you want to scan.
