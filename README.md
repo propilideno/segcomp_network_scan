@@ -38,23 +38,30 @@ You can also use nmap to scan the ports.
 ```
 
 ### nmap
+With nmap you can scan the ports of a target. You also can use the `-A` flag to get more information about the target and the `-p` flag to specify the ports you want to scan.
 ```bash
 nmap $IP
 nmap -A $IP
+```
+
+```bash
 nmap -p0- -v -A -T4 $IP
 nmap -p80-85,443,8000-8005,3000-3306 $IP
 ```
 
 ### tcpdump
+Use tcpdump to capture packets from a network interface.
 ```bash
-INTERFACE="enp5"
+INTERFACE="enp0s5"
+sudo tcpdump -i any # All interfaces
+sudo tcpdump -i $(INTERFACE) # Interface filter
 
-sudo tcpdump -i enp0s5 port 80
-sudo tcpdump -i enp0s5 host 107.22.107.88
+sudo tcpdump -i $(INTERFACE) port 80 # Interface, port filter
+sudo tcpdump -i $(INTERFACE) port 80 -w target.pcap # Write to a pcap file
 ```
-
+Read from a pcap file
 ```bash
-tcpdump -i $(INTERFACE) -w mycapture.pcap
+sudo tcpdump -r -w target.pcap
 ```
 
 ### zeek
