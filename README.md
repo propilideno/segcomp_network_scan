@@ -44,7 +44,7 @@ docker run -d --net=host ntop/ntopng:stable --community -i any
 
 ## Usage
 ```bash
-IP=$(107.21.72.125)
+IP="54.162.185.143"
 ```
 With netcat you can check if a port is open or not.
 ```bash
