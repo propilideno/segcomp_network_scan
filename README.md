@@ -8,10 +8,19 @@
 
 ## VM - AWS EC2
 
-Adding ntopng to the mix. (insteadof cicflowmeter)
+We're using terraform to create a VM on AWS EC2. The VM is a t2.micro instance with Ubuntu 20.04 LTS.
+Terraform is a tool for building, changing, and versioning infrastructure safely and efficiently.
+
 ```bash
-docker run -d --net=host ntop/ntopng:stable --community -i any
+# this is a common terraform lifecycle
+terraform init
+terraform plan
+terraform apply
+terraform destroy
 ```
+
+## Services
+We're running these services on the VM, to analyze the target.
 
 ```bash
 git clone https://github.com/propilideno/dpki
@@ -19,9 +28,18 @@ cd dpki
 docker-compose up -d
 ```
 
+This services are common used services in enterprise environments. We're using them because it's widely used and run on common ports.
 ```bash
 docker run -d --name=grafana -p 3000:3000 grafana/grafana
 docker run -d --name=mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql
+```
+
+### Flow analysis
+
+To analyze the flow of the network we're using ntopng. The command below will start the ntopng service on the VM.
+ntopng is a web-based traffic analysis tool for monitoring networks based on flow data while providing useful insights into the network traffic.
+```bash
+docker run -d --net=host ntop/ntopng:stable --community -i any
 ```
 
 ## Usage
