@@ -67,12 +67,15 @@ nmap -p80-85,443,8000-8005,3000-3306 $IP
 ### tcpdump
 Use tcpdump to capture packets from a network interface.
 ```bash
+ip l # Show current interfaces
+```
+```bash
 INTERFACE="enp0s5"
 sudo tcpdump -i any # All interfaces
-sudo tcpdump -i $(INTERFACE) # Interface filter
+sudo tcpdump -i $INTERFACE # Interface filter
 
-sudo tcpdump -i $(INTERFACE) port 80 # Interface, port filter
-sudo tcpdump -i $(INTERFACE) port 80 -w target.pcap # Write to a pcap file
+sudo tcpdump -i $INTERFACE port 80 # Interface, port filter
+sudo tcpdump -i $INTERFACE port 80 -w target.pcap # Write to a pcap file
 ```
 Read from a pcap file
 ```bash
