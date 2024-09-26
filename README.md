@@ -3,7 +3,7 @@
 ## Tools
 - tcpdump
 - zeek
-- ~~- cicflowmeter~~ nettopng
+- ~~- cicflowmeter~~ ntopng
 - nmap
 
 ## VM - AWS EC2
@@ -30,7 +30,6 @@ docker-compose up -d
 
 This services are common used services in enterprise environments. We're using them because it's widely used and run on common ports.
 ```bash
-docker run -d --name=grafana -p 3000:3000 grafana/grafana
 docker run -d --name=mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql
 ```
 
@@ -48,7 +47,7 @@ IP="54.162.185.143"
 ```
 With netcat you can check if a port is open or not.
 ```bash
-for i in "80" "3000" "3306" "8080" "443" "22" "9000" ""; do nc -zv $IP $i; done
+for i in "80" "3000" "3306" "8080" "443" "22" "9000"; do nc -zv $IP $i; done
 ```
 You can also use nmap to scan the ports.
 
@@ -69,6 +68,7 @@ Use tcpdump to capture packets from a network interface.
 ```bash
 ip l # Show current interfaces
 ```
+Generate a pcap file
 ```bash
 INTERFACE="enp0s5"
 sudo tcpdump -i any # All interfaces
