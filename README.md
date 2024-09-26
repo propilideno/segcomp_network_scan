@@ -8,7 +8,7 @@
 
 ## VM - AWS EC2
 
-We're using terraform to create a VM on AWS EC2. The VM is a t2.micro instance with Ubuntu 20.04 LTS.
+We're using terraform to create a VM on AWS EC2. The VM is a t3.large instance with Ubuntu 20.04 LTS.
 Terraform is a tool for building, changing, and versioning infrastructure safely and efficiently.
 
 ```bash
