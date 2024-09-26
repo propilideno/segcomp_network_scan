@@ -30,6 +30,7 @@ docker-compose up -d
 
 This services are common used services in enterprise environments. We're using them because it's widely used and run on common ports.
 ```bash
+docker run -d --name=grafana -p 8080:3000 grafana/grafana
 docker run -d --name=mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql
 ```
 
